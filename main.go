@@ -18,18 +18,18 @@ func main() {
 	serverPort := 8080
 
 	router := gin.Default()
-	router.GET("/albums", getAlbums)
-	router.GET("/albums/:id", getAlbumByID)
-	router.POST("/albums", postAlbums)
+	router.GET("/albums", GetAlbums)
+	router.GET("/albums/:id", GetAlbumByID)
+	router.POST("/albums", PostAlbums)
 
 	router.Run(fmt.Sprintf(":%d", serverPort))
 }
 
-func getAlbums(ctx *gin.Context) {
+func GetAlbums(ctx *gin.Context) {
 	ctx.IndentedJSON(http.StatusOK, albums)
 }
 
-func postAlbums(ctx *gin.Context) {
+func PostAlbums(ctx *gin.Context) {
 	var newAlbum models.Album
 
 	// bind JSON to struct
@@ -41,7 +41,7 @@ func postAlbums(ctx *gin.Context) {
 	ctx.IndentedJSON(http.StatusOK, albums)
 }
 
-func getAlbumByID(ctx *gin.Context) {
+func GetAlbumByID(ctx *gin.Context) {
 	id := ctx.Param("id")
 
 	for _, a := range albums {
